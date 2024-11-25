@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <h1>Привет, {{ user_name }}!</h1>
+    <script>
+        // Инициализация WebApp API
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+
+        // Получение информации о пользователе
+        const user = tg.initDataUnsafe.user;
+        document.querySelector('h1').textContent = `Привет, ${user?.first_name || "гость"}!`;
+
+        // Кнопка "Закрыть приложение"
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = "Закрыть";
+        closeBtn.onclick = () => tg.close();
+        document.body.appendChild(closeBtn);
+    </script>
+</body>
+</html>
