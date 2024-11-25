@@ -5,9 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram Web App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffffff; /* Белый фон */
+            color: #333; /* Тёмно-серый текст */
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        img {
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+            border-radius: 10px; /* Скруглённые углы */
+        }
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0088cc; /* Telegram-синий */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f99; /* Темнее при наведении */
+        }
+    </style>
 </head>
 <body>
-    <h1>Привет, {{ user_name }}!</h1>
+    <h1 id="greeting">Привет!</h1>
+    <img src="https://placekitten.com/300/300" alt="Котик">
+    <button onclick="window.Telegram.WebApp.close()">Закрыть</button>
+
     <script>
         // Инициализация WebApp API
         const tg = window.Telegram.WebApp;
@@ -15,13 +50,8 @@
 
         // Получение информации о пользователе
         const user = tg.initDataUnsafe.user;
-        document.querySelector('h1').textContent = `Привет, ${user?.first_name || "гость"}!`;
-
-        // Кнопка "Закрыть приложение"
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = "Закрыть";
-        closeBtn.onclick = () => tg.close();
-        document.body.appendChild(closeBtn);
+        const greeting = document.getElementById('greeting');
+        greeting.textContent = `Привет, ${user?.first_name || "гость"}!`;
     </script>
 </body>
 </html>
